@@ -16,6 +16,12 @@ include 'statelogic.php';
 <script src="https://kit.fontawesome.com/a03f199d35.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- chart.js-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js
+
+"></script>
 
 </head>
 <body>
@@ -56,6 +62,7 @@ include 'statelogic.php';
 				<tr>
 					<th scope="col">States</th>
 					<th scope="col">Confirmed</th>
+					<th scope="col">Active</th>
 					<th scope="col">Recovered</th>
 					<th scope="col">Death</th>
 				</tr>
@@ -66,22 +73,36 @@ include 'statelogic.php';
 				{
 					echo '<tr>
 							<th>'.$value['state'].'</th>
+							<td>'.$value['confirmed'].'</td>
+							<td>'.$value['active'].'</td>
+							<td>'.$value['recovered'].'</td>
+							<td>'.$value['deaths'].'</td>
 						 </tr>';
 					
 	
 				}
-				?>
-								
+				?>				
 			</tbody>
 		</table>
+
+		<canvas id="myChart"></canvas>
 		
 	</div>
+	<footer class="footer mt-auto py-3 bg-light">
+		<div class="container text-center">
+			<span class="text-muted">Designed and developed</span><br><span class="text-muted">By</span><br><span class="text-muted">Sushant Rokade</span>
+
+		</div>
+	</footer>
 
 </body>
 </html>
 
 <script>
 	$(document).ready(function(){
+
+	
+
 		$.getJSON("https://api.covid19india.org/data.json",function(data){
 			var states=[];
 			var confirmed=[];
@@ -116,6 +137,35 @@ include 'statelogic.php';
 			confirmed.shift();
 			recovered.shift();
 			deaths.shift();
+			var myChart=document.getElementById('myChart').getContext('2d');
+
+			var chart = new Chart(myChart,{
+				type:"bar",
+				data:{
+					labels:states,
+					datasets:[
+						{
+							label:"Confirmed",
+							data:confirmed,
+							backgroundColor:"#f1c40f",
+							minBarLength:50,
+						},
+						{
+							label:"recovered",
+							data:recovered,
+							backgroundColor:"#2ecc71",
+							minBarLength:50,
+						},
+						{
+							label:"Deaths",
+							data:deaths,
+							backgroundColor:"#e74c3c",
+							minBarLength:50,
+						}
+					]
+				},
+				option:{}
+			})
 		});
 	});
 </script>
