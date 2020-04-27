@@ -85,7 +85,7 @@ include 'statelogic.php';
 			</tbody>
 		</table>
 
-		<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+		<div class="container" style="height:80vh; width:100%">
 			<canvas id="myChart"></canvas>
 		</div>
 		
@@ -142,7 +142,7 @@ include 'statelogic.php';
 			var myChart=document.getElementById('myChart').getContext('2d');
 
 			var chart = new Chart(myChart,{
-				type:"bar",
+				type:"line",
 				data:{
 					labels:states,
 					datasets:[
@@ -166,7 +166,9 @@ include 'statelogic.php';
 						}
 					]
 				},
-				option:{responsive:true}
+				option:{responsive:true,
+					maintainAspectRatio: false,
+				},
 			})
 		});
 	});
