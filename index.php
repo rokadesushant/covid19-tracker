@@ -85,7 +85,9 @@ include 'statelogic.php';
 			</tbody>
 		</table>
 
-		<canvas id="myChart"></canvas>
+		<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+			<canvas id="myChart"></canvas>
+		</div>
 		
 	</div>
 	<footer class="footer mt-auto py-3 bg-light">
@@ -164,7 +166,7 @@ include 'statelogic.php';
 						}
 					]
 				},
-				option:{}
+				option:{responsive:true}
 			})
 		});
 	});
