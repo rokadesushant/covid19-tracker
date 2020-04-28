@@ -6,6 +6,7 @@ include 'statelogic.php';
 <html>
 <head>
 	<title>Covid19-Tracker</title>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -85,9 +86,10 @@ include 'statelogic.php';
 			</tbody>
 		</table>
 
-		<div class="container" style="height:80vh; width:100%">
-			<canvas id="myChart"></canvas>
-		</div>
+		
+			<!--<div id="visualization" style="margin: 1em"> </div>-->
+			<div id="regions_div" style="width: 600px; height: 600px;"></div>
+		
 		
 	</div>
 	<footer class="footer mt-auto py-3 bg-light">
@@ -109,7 +111,8 @@ include 'statelogic.php';
 			var states=[];
 			var confirmed=[];
 			var recovered=[];
-			var deaths=[]; 
+			var deaths=[];
+			var val=[]; 
 
 			var total_confirmed;
 			var total_active;
@@ -139,9 +142,112 @@ include 'statelogic.php';
 			confirmed.shift();
 			recovered.shift();
 			deaths.shift();
-			var myChart=document.getElementById('myChart').getContext('2d');
 
-			var chart = new Chart(myChart,{
+			//console.log(states[0]);
+			//console.log(confirmed[0]);
+			//console.log(typeof confirmed[0]);
+			//val=parseInt(confirmed[0]);
+			//console.log(typeof val);
+			for(i=0;i<confirmed.length;i++)
+				val[i]=parseInt(confirmed[i]);
+
+			
+
+			google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       // 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['State','Confirmed'],
+          [states[0],val[0]],
+          [states[1],val[1]],
+          [states[2],val[2]],
+          [states[3],val[3]],
+          [states[4],val[4]],
+          [states[5],val[5]],
+          [states[6],val[6]],
+          [states[7],val[7]],
+          [states[8],val[8]],
+          [states[9],val[9]],
+          [states[10],val[10]],
+          [states[11],val[11]],
+          [states[12],val[12]],
+          [states[13],val[13]],
+          [states[14],val[14]],
+          [states[15],val[15]],
+          ['Orissa',val[16]],
+          [states[17],val[17]],
+          [states[18],val[18]],
+          [states[19],val[19]],
+          [states[20],val[20]],
+          [states[21],val[21]],
+          [states[22],val[22]],
+          [states[23],val[23]],
+          [states[24],val[24]],
+          [states[25],val[25]],
+          [states[26],val[26]],
+          [states[27],val[27]],
+          [states[28],val[28]],
+          [states[29],val[29]],
+          [states[30],val[30]],
+          [states[31],val[31]],
+          [states[32],val[32]],
+          [states[33],val[33]],
+          [states[34],val[34]],
+          [states[35],val[35]],
+          [states[36],val[36]],
+          [states[37],val[37]]
+          
+          
+        ]);
+
+        var options = {
+          title: "Confirmed Cases",
+          region:'IN',
+          displayMode:'regions',
+          resolution:'provinces',
+          chartArea: {width: '100%'},
+          colors: ['#b3b3ff','#9999ff','#8080ff','#6666ff','#4d4dff','#3333ff','#1a1aff','#0000ff','#0000e6','#0000cc','#0000b3']
+        };
+
+
+
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+			/*google.load('visualization', '1', {'packages': ['geochart']});
+google.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+  var data = google.visualization.arrayToDataTable([
+    ['State','Confirmed'],
+    [states[0],confirmed[0]]
+    
+  ]);
+  
+  var opts = {
+    region: 'IN',
+    domain:'IN',
+    displayMode: 'regions',
+    resolution: 'provinces',
+    width: 640, 
+    height: 480,
+    colors: ['#00FF00','#0000FF','#000000','#FFFFFF','#FF0000']
+  };
+  var geochart = new google.visualization.GeoChart(
+      document.getElementById('visualization'));
+  geochart.draw(data, opts);
+};*/
+			//var myChart=document.getElementById('myChart').getContext('2d');
+
+			/*var chart = new Chart(myChart,{
 				type:"line",
 				data:{
 					labels:states,
@@ -169,7 +275,7 @@ include 'statelogic.php';
 				option:{responsive:true,
 					maintainAspectRatio: false,
 				},
-			})
+			})*/
 		});
 	});
 </script>
