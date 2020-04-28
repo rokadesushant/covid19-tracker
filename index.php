@@ -86,9 +86,11 @@ include 'statelogic.php';
 			</tbody>
 		</table>
 
-		
-			<!--<div id="visualization" style="margin: 1em"> </div>-->
+		<div class="container">
 			<div id="regions_div" style="width: 600px; height: 600px;"></div>
+		</div>
+			<!--<div id="visualization" style="margin: 1em"> </div>-->
+			
 		
 		
 	</div>
