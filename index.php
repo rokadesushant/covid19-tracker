@@ -41,7 +41,7 @@ include 'statelogic.php';
 				
 			</div>
 
-			<div class="col-3 text-warning">
+			<div class="col-3 text-info">
 				<h5>Active</h5>
 				<p id="active"></p>
 				<p id="diffact"></p>
