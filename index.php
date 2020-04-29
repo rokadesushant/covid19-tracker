@@ -263,7 +263,7 @@ include 'statelogic.php';
 			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
 
 
-			$("#confirmed").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</small>');
+			$("#confirmed").append('<small class="text-danger pl-1"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</small>');
 			
 			$("#recovered").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_recovered+'</small>');
 			$("#deaths").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_death+'</small>');
