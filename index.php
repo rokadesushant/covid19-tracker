@@ -62,11 +62,11 @@ include 'statelogic.php';
 			<table class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">States</th>
-					<th scope="col">Confirmed</th>
-					<th scope="col">Active</th>
-					<th scope="col">Recovered</th>
-					<th scope="col">Death</th>
+					<th >States</th>
+					<th >Confirmed</th>
+					<th >Active</th>
+					<th >Recovered</th>
+					<th >Death</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -271,7 +271,7 @@ include 'statelogic.php';
 
 			console.log(increase_confirm);
 			//console.log(lastconfirmed);
-					var d=[['date','cmd','rcvd','dths']];
+					var d=[['date','confirmed','recieved','deaths']];
 			j=1;
 			for(i=0;i<date.length;i++)
 			{

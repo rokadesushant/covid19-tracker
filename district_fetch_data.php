@@ -24,11 +24,11 @@ forEach($disdata as $key=>$value)
 		//echo $state;
 		for($i=0;$i<count($value['districtData']);$i++){
 			$output.='<tr>
-				<th>'.$value['districtData'][$i]['district'].'</th>
-				<td>'.$value['districtData'][$i]['confirmed'].'</td>
-				<td>'.$value['districtData'][$i]['active'].'</td>
-				<td>'.$value['districtData'][$i]['recovered'].'</td>
-				<td>'.$value['districtData'][$i]['deceased'].'</td>
+				<th class="col-4">'.$value['districtData'][$i]['district'].'</th>
+				<td class="col-4">'.$value['districtData'][$i]['confirmed'].'</td>
+				<td class="col-4">'.$value['districtData'][$i]['active'].'</td>
+				<td class="col-4">'.$value['districtData'][$i]['recovered'].'</td>
+				<td class="col-4">'.$value['districtData'][$i]['deceased'].'</td>
 			</tr>';
 			//print_r($value['districtData'][$i]['district']);
 		}
