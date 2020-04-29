@@ -30,6 +30,7 @@ include 'statelogic.php';
 	<?php include('navabar.html');  ?>
 	<div class="container-fluid bg-light p-5 text-center my-3">
 		<h1>Covid-19 Tracker</h1>
+		<img src="covid.jpg">
 	</div>
 
 	<div class="container my-5">
