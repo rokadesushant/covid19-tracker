@@ -24,7 +24,7 @@ forEach($disdata as $key=>$value)
 	{
 		//echo $state;
 		for($i=0;$i<count($value['districtData']);$i++){
-			$output.='<tr class="col-md-3 col-sm-3">
+			$output.='<tr>
 				<th>'.$value['districtData'][$i]['district'].'</th>
 				<td>'.$value['districtData'][$i]['confirmed'].'</td>
 				<td>'.$value['districtData'][$i]['active'].'</td>
