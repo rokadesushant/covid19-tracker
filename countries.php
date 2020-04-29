@@ -80,9 +80,10 @@ include 'logic.php';
 		</table>
 		
 	</div>
-		<footer class="footer mt-auto py-3 bg-light">
+		
+	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container text-center">
-			<span class="text-muted">Designed and developed</span><br><span class="text-muted">By</span><br><span class="text-muted">Sushant Rokade</span>
+			<span class="text-dark">Designed and developed</span><br><span class="text-dark">By</span><br><span class="text-dark">Sushant Rokade</span>
 
 		</div>
 	</footer>
