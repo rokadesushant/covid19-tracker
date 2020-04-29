@@ -148,10 +148,10 @@
 				if(state==states[i])
 				{
 					//alert(states[i]);
-					$("#confirmed").append(confirmed[i]);
-					$("#active").append(active[i]);
-					$("#recovered").append(recovered[i]);
-					$("#deaths").append(deaths[i]);
+					$("#confirmed").append('<h4>'+confirmed[i]+'</h4>');
+					$("#active").append('<h4>'+active[i]+'</h4>');
+					$("#recovered").append('<h4>'+recovered[i]+'</h4>');
+					$("#deaths").append('<h4>'+deaths[i]+'</h4>');
 					 $.ajax({
 					 	type:"POST",
 					 	url:"district_fetch_data.php",

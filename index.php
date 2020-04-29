@@ -37,22 +37,26 @@ include 'statelogic.php';
 			<div class="col-3 text-dark">
 				<h5>Confirmed</h5>
 				<p id="confirmed"></p>
+				<p id="diffcmd"></p>
 				
 			</div>
 
 			<div class="col-3 text-warning">
 				<h5>Active</h5>
 				<p id="active"></p>
+				<p id="diffact"></p>
 			</div>
 
 			<div class="col-3 text-success">
 				<h5>Recovered</h5>
 				<p id="recovered"></p>
+				<p id="diffrcv"></p>
 			</div>
 
 			<div class="col-3 text-danger">
 				<h5>Death</h5>
 				<p id="deaths"></p>
+				<p id="diffdth"></p>
 			</div>
 		</div>
 	</div>
@@ -135,10 +139,10 @@ include 'statelogic.php';
 			total_recovered=data.statewise[0].recovered;
 			total_deaths=data.statewise[0].deaths;
 
-			$("#confirmed").append(total_confirmed);
-			$("#active").append(total_active);
-			$("#recovered").append(total_recovered);
-			$("#deaths").append(total_deaths);
+			$("#confirmed").append('<h4>'+total_confirmed+'</h4>');
+			$("#active").append('<h4>'+total_active+'</h4>');
+			$("#recovered").append('<h4>'+total_recovered+'</h4>');
+			$("#deaths").append('<h4>'+total_deaths+'</h4>');
 
 
 
@@ -263,10 +267,10 @@ include 'statelogic.php';
 			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
 
 
-			$("#confirmed").append('<small class="text-danger pl-1"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</small>');
+			$("#confirmed").append('<h5 class="text-danger pl-1"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</h5>');
 			
-			$("#recovered").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_recovered+'</small>');
-			$("#deaths").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_death+'</small>');
+			$("#recovered").append('<h5 class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_recovered+'</h5>');
+			$("#deaths").append('<h5 class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_death+'</h5>');
 
 
 			console.log(increase_confirm);
