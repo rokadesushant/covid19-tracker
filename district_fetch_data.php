@@ -6,7 +6,8 @@ $disdata=json_decode($districtdata,true);
 $statedata=json_decode($jsonData,true);
 $state=$_POST['state'];
 $output='';
-$output.='<table class="table">
+$output.='<div class="table-responsive">
+			<table class="table">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">District</th>
@@ -23,12 +24,12 @@ forEach($disdata as $key=>$value)
 	{
 		//echo $state;
 		for($i=0;$i<count($value['districtData']);$i++){
-			$output.='<tr>
-				<th class="col-4">'.$value['districtData'][$i]['district'].'</th>
-				<td class="col-4">'.$value['districtData'][$i]['confirmed'].'</td>
-				<td class="col-4">'.$value['districtData'][$i]['active'].'</td>
-				<td class="col-4">'.$value['districtData'][$i]['recovered'].'</td>
-				<td class="col-4">'.$value['districtData'][$i]['deceased'].'</td>
+			$output.='<tr class="col-md-4 col-sm-4">
+				<th>'.$value['districtData'][$i]['district'].'</th>
+				<td>'.$value['districtData'][$i]['confirmed'].'</td>
+				<td>'.$value['districtData'][$i]['active'].'</td>
+				<td>'.$value['districtData'][$i]['recovered'].'</td>
+				<td>'.$value['districtData'][$i]['deceased'].'</td>
 			</tr>';
 			//print_r($value['districtData'][$i]['district']);
 		}
@@ -42,7 +43,7 @@ forEach($disdata as $key=>$value)
 	
 	 
 }
-$output.='</tbody></table>';
+$output.='</tbody></table></div>';
 echo $output;
 //echo $days_count;
 //echo $days_count_prev;
