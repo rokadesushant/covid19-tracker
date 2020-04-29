@@ -1,5 +1,3 @@
-
-
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -14,8 +12,8 @@
 
       function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable([
-          ['State Code', 'State','Population'],
-          ['IN-OR','Odisha', 100]
+          ['State Code','District Code','Population'],
+          ['IN-KA','IN.KA.BD' ,100]
         ]);
 
         var options = {

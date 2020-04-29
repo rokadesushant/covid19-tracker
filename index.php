@@ -5,6 +5,7 @@ include 'statelogic.php';
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/earlyaccess/hanna.css">
 	<title>Covid19-Tracker</title>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,14 +87,23 @@ include 'statelogic.php';
 			</tbody>
 		</table>
 
-		<div class="container">
-			<div id="regions_div" style="width: 600px; height: 600px;"></div>
-		</div>
 			<!--<div id="visualization" style="margin: 1em"> </div>-->
 			
 		
 		
 	</div>
+	<div class="container">
+		<div class="col-md-6">
+			<div id="regions_div" style="width: 100%; min-height: 450px;"></div>
+		</div>
+
+		<div class="col-md-6">
+		<div id="chart_div" style="width: 100%; min-height: 450px;"></div>	
+		</div>
+			
+		</div>
+		
+		
 	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container text-center">
 			<span class="text-muted">Designed and developed</span><br><span class="text-muted">By</span><br><span class="text-muted">Sushant Rokade</span>
@@ -123,8 +133,8 @@ include 'statelogic.php';
 			total_confirmed=data.statewise[0].confirmed;
 			total_active=data.statewise[0].active;
 			total_recovered=data.statewise[0].recovered;
-
 			total_deaths=data.statewise[0].deaths;
+
 			$("#confirmed").append(total_confirmed);
 			$("#active").append(total_active);
 			$("#recovered").append(total_recovered);
@@ -224,60 +234,78 @@ include 'statelogic.php';
 
         chart.draw(data, options);
       }
-			/*google.load('visualization', '1', {'packages': ['geochart']});
-google.setOnLoadCallback(drawVisualization);
+			
+		});
 
-function drawVisualization() {
-  var data = google.visualization.arrayToDataTable([
-    ['State','Confirmed'],
-    [states[0],confirmed[0]]
-    
-  ]);
-  
-  var opts = {
-    region: 'IN',
-    domain:'IN',
-    displayMode: 'regions',
-    resolution: 'provinces',
-    width: 640, 
-    height: 480,
-    colors: ['#00FF00','#0000FF','#000000','#FFFFFF','#FF0000']
-  };
-  var geochart = new google.visualization.GeoChart(
-      document.getElementById('visualization'));
-  geochart.draw(data, opts);
-};*/
-			//var myChart=document.getElementById('myChart').getContext('2d');
+		$.getJSON("https://api.covid19india.org/data.json",function(data){
+			var totalconfirmed=[];
+			var date=[];
+			var totalrecovered=[];
+			var totaldeath=[];
+			//console.log(data.cases_time_series);
+			$.each(data.cases_time_series,function(id,obj){
+				totalconfirmed.push(obj.totalconfirmed);
+				totalrecovered.push(obj.totalrecovered);
+				date.push(obj.date);
+				totaldeath.push(obj.totaldeceased);
 
-			/*var chart = new Chart(myChart,{
-				type:"line",
-				data:{
-					labels:states,
-					datasets:[
-						{
-							label:"Confirmed",
-							data:confirmed,
-							backgroundColor:"#f1c40f",
-							minBarLength:50,
-						},
-						{
-							label:"recovered",
-							data:recovered,
-							backgroundColor:"#2ecc71",
-							minBarLength:50,
-						},
-						{
-							label:"Deaths",
-							data:deaths,
-							backgroundColor:"#e74c3c",
-							minBarLength:50,
-						}
-					]
-				},
-				option:{responsive:true,
-					maintainAspectRatio: false,
-				},
-			})*/
+		
+	   //console.log(d.date);
+				
+			});
+			total_confirmed=data.statewise[0].confirmed;
+			total_active=data.statewise[0].active;
+			total_recovered=data.statewise[0].recovered;
+			total_deaths=data.statewise[0].deaths;
+
+			var increase_confirm=total_confirmed-totalconfirmed[totalconfirmed.length-1];
+			var increase_recovered=total_recovered-totalrecovered[totalrecovered.length-1];
+			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
+
+
+			$("#confirmed").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</small>');
+			
+			$("#recovered").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_recovered+'</small>');
+			$("#deaths").append('<small class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_death+'</small>');
+
+
+			console.log(increase_confirm);
+			//console.log(lastconfirmed);
+					var d=[['date','cmd','rcvd','dths']];
+			j=1;
+			for(i=0;i<date.length;i++)
+			{
+				d[[j]]=[date[i],parseInt(totalconfirmed[i]),parseInt(totalrecovered[i]),parseInt(totaldeath[i])];
+				j++;
+			}	    
+	    //console.log(d);
+
+			google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawBackgroundColor);
+
+function drawBackgroundColor() {
+
+
+
+      var data = new google.visualization.arrayToDataTable(d)
+      //console.log(data);
+      
+      
+
+      var options = {
+        hAxis: {
+          title: 'Date'
+        },
+        vAxis: {
+          title: 'Cases'
+        },
+        backgroundColor: '#ffffff'
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+			
 		});
 	});
 </script>
