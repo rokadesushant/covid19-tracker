@@ -23,6 +23,8 @@
 </head>
 <body>
 <?php include 'navabar.html'; ?>
+<br>
+<br>
 <div class="container">
 	<select name="state" id="state" class="form-control">
 <option value="">Select State</option>		

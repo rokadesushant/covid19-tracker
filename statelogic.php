@@ -7,7 +7,6 @@ $resdata=json_decode($resourcedata,true);
 $statedata=json_decode($jsonData,true);
 
 
-
 //echo $days_count;
 //echo $days_count_prev;
 //$value['state']

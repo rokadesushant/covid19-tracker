@@ -79,10 +79,10 @@ include 'statelogic.php';
 				{
 					echo '<tr>
 							<th>'.$value['state'].'</th>
-							<td>'.$value['confirmed'].'</td>
+							<td>'.$value['confirmed'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['deltaconfirmed'].'</td>
 							<td>'.$value['active'].'</td>
-							<td>'.$value['recovered'].'</td>
-							<td>'.$value['deaths'].'</td>
+							<td>'.$value['recovered'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-success"></i></small>'.$value['deltarecovered'].'</td>
+							<td>'.$value['deaths'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['deltadeaths'].'</td>
 						 </tr>';
 					
 	
@@ -267,10 +267,10 @@ include 'statelogic.php';
 			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
 
 
-			$("#confirmed").append('<h5 class="text-danger pl-1"><i class="fas fa-arrow-up"></i>'+increase_confirm+'</h5>');
+			$("#confirmed").append('<h5 class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i>'+increase_confirm+'</h5>');
 			
-			$("#recovered").append('<h5 class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_recovered+'</h5>');
-			$("#deaths").append('<h5 class="text-danger pl-2"><i class="fas fa-arrow-up"></i>'+increase_death+'</h5>');
+			$("#recovered").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-success"></i>'+increase_recovered+'</h5>');
+			$("#deaths").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-danger"></i>'+increase_death+'</h5>');
 
 
 			console.log(increase_confirm);
