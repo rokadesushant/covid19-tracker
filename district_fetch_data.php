@@ -10,11 +10,11 @@ $output.='<div class="table-responsive">
 			<table class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">District</th>
-					<th scope="col">Confirmed</th>
-					<th scope="col">Active</th>
-					<th scope="col">Recovered</th>
-					<th scope="col">Death</th>
+					<th scope="col" class="text-center">District</th>
+					<th scope="col" class="text-center">Confirmed</th>
+					<th scope="col" class="text-center">Active</th>
+					<th scope="col" class="text-center">Recovered</th>
+					<th scope="col" class="text-center">Death</th>
 				</tr>
 			</thead>
 			<tbody>';
@@ -25,11 +25,11 @@ forEach($disdata as $key=>$value)
 		//echo $state;
 		for($i=0;$i<count($value['districtData']);$i++){
 			$output.='<tr>
-				<th>'.$value['districtData'][$i]['district'].'</th>
-				<td>'.$value['districtData'][$i]['confirmed'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['districtData'][$i]['delta']['confirmed'].'</td>
-				<td>'.$value['districtData'][$i]['active'].'</td>
-				<td>'.$value['districtData'][$i]['recovered'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-success"></i></small>'.$value['districtData'][$i]['delta']['recovered'].'</td>
-				<td>'.$value['districtData'][$i]['deceased'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['districtData'][$i]['delta']['deceased'].'</td>
+				<th class="text-center">'.$value['districtData'][$i]['district'].'</th>
+				<td class="text-center">'.$value['districtData'][$i]['confirmed'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['districtData'][$i]['delta']['confirmed'].'</td>
+				<td class="text-center">'.$value['districtData'][$i]['active'].'</td>
+				<td class="text-center">'.$value['districtData'][$i]['recovered'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-success"></i></small>'.$value['districtData'][$i]['delta']['recovered'].'</td>
+				<td class="text-center">'.$value['districtData'][$i]['deceased'].'<br><small class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i></small>'.$value['districtData'][$i]['delta']['deceased'].'</td>
 			</tr>';
 			//print_r($value['districtData'][$i]['district']);
 		}
