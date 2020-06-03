@@ -26,7 +26,7 @@ include 'logic.php';
 
 	<div class="container my-5">
 		<div class="row text-center">
-			<div class="col-4 text-warning">
+			<div class="col-4 text-danger">
 				<h5>Confirmed</h5>
 				<?php echo $totalconfirmedcases;?>
 			</div>
