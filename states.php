@@ -21,7 +21,7 @@
 "></script>
 
 </head>
-<body>
+<body style="background:url("background.jpg");">
 <?php include 'navabar.html'; ?>
 <br>
 <br>

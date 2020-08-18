@@ -1,3 +1,5 @@
+
+
 <?php
 include 'statelogic.php';
 ?>
@@ -26,7 +28,7 @@ include 'statelogic.php';
 "></script>
 
 </head>
-<body>
+<body style="background:url("background.jpg");">
 	<?php include('navabar.html');  ?>
 	<div class="container-fluid bg-light p-5 text-center my-3">
 		<h1>Covid-19 Tracker</h1>
@@ -93,19 +95,22 @@ include 'statelogic.php';
 
 			<!--<div id="visualization" style="margin: 1em"> </div>-->
 			
-		
+		<hr>
 		
 	</div>
 	<div class="container">
 		<div class="col-md-6">
 			<div id="regions_div" style="width: 100%; min-height: 450px;"></div>
 		</div>
-
+		
+		<hr>
+		
 		<div class="col-md-6">
-		<div id="chart_div" style="width: 100%; min-height: 450px;"></div>	
+			<canvas id="piechart"></canvas>
 		</div>
-			
-		</div>
+
+		<br>
+		<br>
 		
 		
 	<footer class="footer mt-auto py-3 bg-light">
@@ -139,16 +144,10 @@ include 'statelogic.php';
 			total_recovered=data.statewise[0].recovered;
 			total_deaths=data.statewise[0].deaths;
 
-			var increase_confirm=data.statewise[0].deltaconfirmed
-			var increase_recovered=data.statewise[0].deltarecovered
-			var increase_death= data.statewise[0].deltadeaths
-
 			$("#confirmed").append('<h4>'+total_confirmed+'</h4>');
 			$("#active").append('<h4>'+total_active+'</h4>');
 			$("#recovered").append('<h4>'+total_recovered+'</h4>');
 			$("#deaths").append('<h4>'+total_deaths+'</h4>');
-
-			
 
 
 
@@ -252,6 +251,7 @@ include 'statelogic.php';
 			var date=[];
 			var totalrecovered=[];
 			var totaldeath=[];
+			var mydata=[];
 			//console.log(data.cases_time_series);
 			$.each(data.cases_time_series,function(id,obj){
 				totalconfirmed.push(obj.totalconfirmed);
@@ -268,15 +268,14 @@ include 'statelogic.php';
 			total_recovered=data.statewise[0].recovered;
 			total_deaths=data.statewise[0].deaths;
 
-			var increase_confirm=data.statewise[0].deltaconfirmed
-			var increase_recovered=data.statewise[0].deltarecovered
-			var increase_death= data.statewise[0].deltadeaths
+			var increase_confirm=total_confirmed-totalconfirmed[totalconfirmed.length-1];
+			var increase_recovered=total_recovered-totalrecovered[totalrecovered.length-1];
+			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
 
 
 			$("#confirmed").append('<h5 class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i>'+increase_confirm+'</h5>');
 			
 			$("#recovered").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-success"></i>'+increase_recovered+'</h5>');
-			
 			$("#deaths").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-danger"></i>'+increase_death+'</h5>');
 
 
@@ -288,7 +287,76 @@ include 'statelogic.php';
 			{
 				d[[j]]=[date[i],parseInt(totalconfirmed[i]),parseInt(totalrecovered[i]),parseInt(totaldeath[i])];
 				j++;
-			}	    
+			}
+
+
+			//creating a pie chart
+
+			mydata.push(total_confirmed);
+			mydata.push(total_active);
+			mydata.push(total_recovered);
+			mydata.push(total_deaths);
+			
+			console.log(mydata);
+			
+			var pie = $("#piechart");
+			
+			//data for pie chart
+			
+				 var data1 = {
+				labels: ["Confirmed", "Active", "Recovered", "Death"],
+		datasets: [
+		  {
+			label: "Cases",
+			data: mydata,
+			backgroundColor: [
+			  "#FF0000",
+			  "#33FAFF",
+			  "#22bb33",
+			  "#F9FF33",
+			  
+			],
+			borderColor: [
+			  "#CDA776",
+			  "#989898",
+			  "#CB252B",
+			  "#E39371",
+			  
+			],
+			borderWidth: [1, 1, 1, 1, 1]
+		  }
+		]
+	  };
+	  
+	  //options
+				
+			var options = {
+		responsive: true,
+		title: {
+		  display: true,
+		  position: "top",
+		  text: "Graphical View",
+		  fontSize: 18,
+		  fontColor: "#111"
+		},
+		legend: {
+		  display: true,
+		  position: "bottom",
+		  labels: {
+			fontColor: "#333",
+			fontSize: 16
+		  }
+		}
+	  };
+				
+		
+		//drawing
+		
+			var chart1 = new Chart(pie, {
+			type: "pie",
+			data: data1,
+			options: options
+	  });
 	    //console.log(d);
 
 			google.charts.load('current', {packages: ['corechart', 'line']});
@@ -318,5 +386,17 @@ function drawBackgroundColor() {
     }
 			
 		});
+		
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	});
+	
 </script>

@@ -18,7 +18,7 @@ include 'logic.php';
 <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<body>
+<body style="background:url("background.jpg");">
 	<?php include('navabar.html');  ?>
 	<div class="container-fluid bg-light p-5 text-center my-3">
 		<h1>Covid-19 Tracker</h1>
