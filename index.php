@@ -99,11 +99,9 @@ include 'statelogic.php';
 		
 	</div>
 	<div class="container">
-		<div class="col-md-6">
-			<div id="regions_div" style="width: 100%; min-height: 450px;"></div>
-		</div>
 		
-		<hr>
+		
+		
 		
 		<div class="col-md-6">
 			<canvas id="piechart"></canvas>
@@ -115,8 +113,7 @@ include 'statelogic.php';
 		
 	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container text-center">
-			<span class="text-dark">Designed and developed</span><br><span class="text-dark">By</span><br><span class="text-dark">Sushant Rokade</span>
-
+			<span class="text-dark">Stay Safe Stay Healthy</span>
 		</div>
 	</footer>
 
@@ -139,251 +136,36 @@ include 'statelogic.php';
 			var total_active;
 			var total_recovered;
 			var total_deaths;
+			var increase_confirm;
+			var increase_recovered;
+			var increase_death;
+			
+			
 			total_confirmed=data.statewise[0].confirmed;
 			total_active=data.statewise[0].active;
 			total_recovered=data.statewise[0].recovered;
 			total_deaths=data.statewise[0].deaths;
-
+			
+			increase_confirm=data.statewise[0].deltaconfirmed;
+			increase_recovered=data.statewise[0].deltarecovered;
+			increase_death=data.statewise[0].deltadeaths;
+			
+			
 			$("#confirmed").append('<h4>'+total_confirmed+'</h4>');
 			$("#active").append('<h4>'+total_active+'</h4>');
 			$("#recovered").append('<h4>'+total_recovered+'</h4>');
 			$("#deaths").append('<h4>'+total_deaths+'</h4>');
-
-
-
-			//console.log(data);
-			$.each(data.statewise,function(id,obj){
-				states.push(obj.state);
-				confirmed.push(obj.confirmed);
-				recovered.push(obj.recovered);
-				deaths.push(obj.deaths);
-			});
-			//console.log(states);
-			states.shift();
-			confirmed.shift();
-			recovered.shift();
-			deaths.shift();
-
-			//console.log(states[0]);
-			//console.log(confirmed[0]);
-			//console.log(typeof confirmed[0]);
-			//val=parseInt(confirmed[0]);
-			//console.log(typeof val);
-			for(i=0;i<confirmed.length;i++)
-				val[i]=parseInt(confirmed[i]);
-
 			
-
-			google.charts.load('current', {
-        'packages':['geochart'],
-        // Note: you will need to get a mapsApiKey for your project.
-        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-       // 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-      });
-      google.charts.setOnLoadCallback(drawRegionsMap);
-
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['State','Confirmed'],
-          [states[0],val[0]],
-          [states[1],val[1]],
-          [states[2],val[2]],
-          [states[3],val[3]],
-          [states[4],val[4]],
-          [states[5],val[5]],
-          [states[6],val[6]],
-          [states[7],val[7]],
-          [states[8],val[8]],
-          [states[9],val[9]],
-          [states[10],val[10]],
-          [states[11],val[11]],
-          [states[12],val[12]],
-          [states[13],val[13]],
-          [states[14],val[14]],
-          [states[15],val[15]],
-          ['Orissa',val[16]],
-          [states[17],val[17]],
-          [states[18],val[18]],
-          [states[19],val[19]],
-          [states[20],val[20]],
-          [states[21],val[21]],
-          [states[22],val[22]],
-          [states[23],val[23]],
-          [states[24],val[24]],
-          [states[25],val[25]],
-          [states[26],val[26]],
-          [states[27],val[27]],
-          [states[28],val[28]],
-          [states[29],val[29]],
-          [states[30],val[30]],
-          [states[31],val[31]],
-          [states[32],val[32]],
-          [states[33],val[33]],
-          [states[34],val[34]],
-          [states[35],val[35]],
-          [states[36],val[36]],
-          [states[37],val[37]]
-          
-          
-        ]);
-
-        var options = {
-          title: "Confirmed Cases",
-          region:'IN',
-          displayMode:'regions',
-          resolution:'provinces',
-          chartArea: {width: '100%'},
-          colors: ['#b3b3ff','#9999ff','#8080ff','#6666ff','#4d4dff','#3333ff','#1a1aff','#0000ff','#0000e6','#0000cc','#0000b3']
-        };
-
-
-
-
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-        chart.draw(data, options);
-      }
-			
-		});
-
-		$.getJSON("https://api.covid19india.org/data.json",function(data){
-			var totalconfirmed=[];
-			var date=[];
-			var totalrecovered=[];
-			var totaldeath=[];
-			var mydata=[];
-			//console.log(data.cases_time_series);
-			$.each(data.cases_time_series,function(id,obj){
-				totalconfirmed.push(obj.totalconfirmed);
-				totalrecovered.push(obj.totalrecovered);
-				date.push(obj.date);
-				totaldeath.push(obj.totaldeceased);
-
-		
-	   //console.log(d.date);
-				
-			});
-			total_confirmed=data.statewise[0].confirmed;
-			total_active=data.statewise[0].active;
-			total_recovered=data.statewise[0].recovered;
-			total_deaths=data.statewise[0].deaths;
-
-			var increase_confirm=total_confirmed-totalconfirmed[totalconfirmed.length-1];
-			var increase_recovered=total_recovered-totalrecovered[totalrecovered.length-1];
-			var increase_death=total_deaths-totaldeath[totaldeath.length-1];
-
-
-			$("#confirmed").append('<h5 class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i>'+increase_confirm+'</h5>');
-			
+			$("#confirmed").append('<h5 class="text-dark pl-1"><i class="fas fa-arrow-up text-danger"></i>'+increase_confirm+'</h5>');	
 			$("#recovered").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-success"></i>'+increase_recovered+'</h5>');
 			$("#deaths").append('<h5 class="text-dark pl-2"><i class="fas fa-arrow-up text-danger"></i>'+increase_death+'</h5>');
 
 
-			console.log(increase_confirm);
-			//console.log(lastconfirmed);
-					var d=[['date','confirmed','recieved','deaths']];
-			j=1;
-			for(i=0;i<date.length;i++)
-			{
-				d[[j]]=[date[i],parseInt(totalconfirmed[i]),parseInt(totalrecovered[i]),parseInt(totaldeath[i])];
-				j++;
-			}
 
+			
 
-			//creating a pie chart
-
-			mydata.push(total_confirmed);
-			mydata.push(total_active);
-			mydata.push(total_recovered);
-			mydata.push(total_deaths);
-			
-			console.log(mydata);
-			
-			var pie = $("#piechart");
-			
-			//data for pie chart
-			
-				 var data1 = {
-				labels: ["Confirmed", "Active", "Recovered", "Death"],
-		datasets: [
-		  {
-			label: "Cases",
-			data: mydata,
-			backgroundColor: [
-			  "#FF0000",
-			  "#33FAFF",
-			  "#22bb33",
-			  "#F9FF33",
-			  
-			],
-			borderColor: [
-			  "#CDA776",
-			  "#989898",
-			  "#CB252B",
-			  "#E39371",
-			  
-			],
-			borderWidth: [1, 1, 1, 1, 1]
-		  }
-		]
-	  };
-	  
-	  //options
-				
-			var options = {
-		responsive: true,
-		title: {
-		  display: true,
-		  position: "top",
-		  text: "Graphical View",
-		  fontSize: 18,
-		  fontColor: "#111"
-		},
-		legend: {
-		  display: true,
-		  position: "bottom",
-		  labels: {
-			fontColor: "#333",
-			fontSize: 16
-		  }
-		}
-	  };
-				
+	
 		
-		//drawing
-		
-			var chart1 = new Chart(pie, {
-			type: "pie",
-			data: data1,
-			options: options
-	  });
-	    //console.log(d);
-
-			google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawBackgroundColor);
-
-function drawBackgroundColor() {
-
-
-
-      var data = new google.visualization.arrayToDataTable(d)
-      //console.log(data);
-      
-      
-
-      var options = {
-        hAxis: {
-          title: 'Date'
-        },
-        vAxis: {
-          title: 'Cases'
-        },
-        backgroundColor: '#ffffff'
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
 			
 		});
 		
@@ -400,3 +182,4 @@ function drawBackgroundColor() {
 	});
 	
 </script>
+

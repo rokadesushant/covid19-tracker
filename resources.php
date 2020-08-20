@@ -76,10 +76,10 @@
 </div>
 
 
+	
 	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container text-center">
-			<span class="text-dark">Designed and developed</span><br><span class="text-dark">By</span><br><span class="text-dark">Sushant Rokade</span>
-
+			<span class="text-dark">Stay Safe Stay Healthy</span>
 		</div>
 	</footer>
 </body>
